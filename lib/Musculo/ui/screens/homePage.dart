@@ -3,19 +3,21 @@ import 'package:flutter/widgets.dart';
 
 class HeaderAppInfo extends StatelessWidget{
 
-  String motivationText = 'Rise and Grind today es your day';
+  String motivationText = 'Rise and Grind, today is your day';
   Image profilePicture;
-  String weight = '67';
+  int weightNumber = 67;
+  List weigthUnit = [' Libras', ' Kilos'];
 
 
 //Texto motivacional del header
   Widget getMotivationText(){
     return Container(
-      margin: EdgeInsets.only(left: 17),
-      height: 20,
-      width: 250,
+      // margin: EdgeInsets.only(left: 75),
       child: Text(
-        motivationText
+        motivationText,
+        style: TextStyle(
+          color: Colors.white
+        )
       ),
     );
   }
@@ -24,30 +26,56 @@ class HeaderAppInfo extends StatelessWidget{
 //Imagen de perfil del usuario
   Widget profileIMage(){
     return Container(
-        margin: EdgeInsets.only(left: 15),
-        width: 80,
-        height: 90,
-        decoration: BoxDecoration(
-          image: DecorationImage(
-            image: AssetImage('assets/shared/profile_picture.jpeg'),
-            fit: BoxFit.cover,
-          ),
-          shape: BoxShape.circle
+      margin: EdgeInsets.only(left: 5),
+      width: 80,
+      height: 90,
+      decoration: BoxDecoration(
+        image: DecorationImage(
+          image: AssetImage('assets/shared/profile_picture.jpeg'),
+          fit: BoxFit.cover,
         ),
-      );
+        shape: BoxShape.circle,
+      )
+    );
+
   }
 
 
+// Peso actual del usuario
   Widget actualWeight(){
     return Container(
-      margin: EdgeInsets.only(left: 17),
-      height: 20,
-      width: 40,
       child: Text(
-        weight 
+        "${weightNumber.toString()  +  weigthUnit[0]}",
+          style: TextStyle(
+          color: Colors.white
+        )
       )
     );
-  } 
+  }
+
+
+//Imagen de fondo para trabajar el background
+  Widget backgroundImage(){
+    return Container(
+      width: double.infinity,
+      height: double.infinity,
+      decoration: BoxDecoration(
+        color: Colors.red,
+        image: DecorationImage(
+          image: AssetImage('assets/shared/background_header.jpg'),
+          fit: BoxFit.cover,
+        ),
+        boxShadow: <BoxShadow>[
+          BoxShadow(
+            color: Colors.black,
+            offset: Offset(1.0, 1.0),
+            blurRadius: 10.0
+
+          )
+        ]
+      ),
+    );
+  }
   
 
 
@@ -57,26 +85,33 @@ class HeaderAppInfo extends StatelessWidget{
   Widget build(BuildContext context) {
     // TODO: implement build
     return Container(
-
       width: double.infinity,
-      height: 200,
-      child: Row( 
+      height: 190,
+      child: Stack(
         children: <Widget>[
-          Container(
-            child: profileIMage()
-          ),
-          Column(
-            crossAxisAlignment: CrossAxisAlignment.start,
-            mainAxisAlignment: MainAxisAlignment.center,
+          backgroundImage(),
+          Row(
+            mainAxisAlignment: MainAxisAlignment.end,
             children: <Widget>[
-              getMotivationText(),
-              actualWeight()
+              Column(
+                crossAxisAlignment: CrossAxisAlignment.end,
+                mainAxisAlignment: MainAxisAlignment.center,
+                children: <Widget>[
+                  getMotivationText(),
+                  actualWeight()
+                ],
+              ),
+              Container(
+                margin: EdgeInsets.only(left: 20, right: 20),
+                child: profileIMage()
+              ),
+
             ],
           ),
         ],
-      ),
+      )
+
     );
-    
   }
   
 
