@@ -4,10 +4,12 @@ import 'package:flutter/widgets.dart';
 class HeaderAppInfo extends StatelessWidget{
 
   String motivationText = 'Rise and Grind, today is your day';
-  Image profilePicture;
+  String profilePicture;
   int weightNumber = 67;
-  List weigthUnit = [' Libras', ' Kilos'];
+  List weigthUnitList = [' Libras', ' Kilos'];
+  int weigthUnitData;
 
+  HeaderAppInfo(this.motivationText, this.profilePicture, this.weightNumber, this.weigthUnitData);
 
 //Texto motivacional del header
   Widget getMotivationText(){
@@ -16,6 +18,7 @@ class HeaderAppInfo extends StatelessWidget{
       child: Text(
         motivationText,
         style: TextStyle(
+          fontWeight: FontWeight.bold,
           color: Colors.white
         )
       ),
@@ -31,7 +34,7 @@ class HeaderAppInfo extends StatelessWidget{
       height: 90,
       decoration: BoxDecoration(
         image: DecorationImage(
-          image: AssetImage('assets/shared/profile_picture.jpeg'),
+          image: AssetImage(profilePicture),
           fit: BoxFit.cover,
         ),
         shape: BoxShape.circle,
@@ -45,8 +48,9 @@ class HeaderAppInfo extends StatelessWidget{
   Widget actualWeight(){
     return Container(
       child: Text(
-        "${weightNumber.toString()  +  weigthUnit[0]}",
-          style: TextStyle(
+        "${weightNumber.toString()  +  weigthUnitList[weigthUnitData]}",
+        style: TextStyle(
+          fontWeight: FontWeight.bold,
           color: Colors.white
         )
       )
@@ -86,24 +90,35 @@ class HeaderAppInfo extends StatelessWidget{
     // TODO: implement build
     return Container(
       width: double.infinity,
-      height: 190,
+      height: 180,
       child: Stack(
         children: <Widget>[
-          backgroundImage(),
+          Opacity(
+            opacity: 0.65,
+            child: backgroundImage(),
+          ),
+          
           Row(
             mainAxisAlignment: MainAxisAlignment.end,
             children: <Widget>[
-              Column(
-                crossAxisAlignment: CrossAxisAlignment.end,
-                mainAxisAlignment: MainAxisAlignment.center,
-                children: <Widget>[
-                  getMotivationText(),
-                  actualWeight()
-                ],
+              Expanded(
+                child: Column(
+                  crossAxisAlignment: CrossAxisAlignment.end,
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  children: <Widget>[
+                    getMotivationText(),
+                    actualWeight()
+                  ],
+                ),
               ),
+
               Container(
-                margin: EdgeInsets.only(left: 20, right: 20),
-                child: profileIMage()
+                margin: EdgeInsets.only(left: 20, right: 30),
+                child: Opacity(
+                  opacity: 0.9,
+                  child: profileIMage()
+                )
+                
               ),
 
             ],

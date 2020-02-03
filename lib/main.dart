@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:measure_to_grow/Musculo/ui/screens/homePage.dart';
+import 'package:measure_to_grow/Musculo/ui/screens/muscleList.dart';
 
 void main() => runApp(MyApp());
 
@@ -35,13 +36,30 @@ class _MyHomePageState extends State<MyHomePage> {
     });
   }
 
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
         title: Text(widget.title),
       ),
-      body: HeaderAppInfo(),
+      body: ListView(
+        children: <Widget>[
+          Column(
+            children: <Widget>[
+              HeaderAppInfo('Rise and grind today is a sunny day', 'assets/shared/profile_picture.jpeg', 69, 1 ),
+              MuscleList(0),
+              MuscleList(1),
+              MuscleList(2),
+              MuscleList(3),
+              MuscleList(4),
+              MuscleList(5),
+              MuscleList(6), 
+            ],
+          ),
+        ],
+      ),
+
       // Center(
       //   child: Column(
       //     mainAxisAlignment: MainAxisAlignment.center,
